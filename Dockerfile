@@ -14,3 +14,6 @@ EXPOSE 80 443
 
 CMD ["nginx"]
 
+VOLUME 
+	/var/cache/nginx
+	/var/run
