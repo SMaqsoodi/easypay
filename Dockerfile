@@ -13,7 +13,7 @@ ADD default /etc/nginx/sites-available/default
 
 ADD src .
 
-EXPOSE 80 443
+EXPOSE 80
 
 CMD ["nginx"]
 

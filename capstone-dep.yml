@@ -10,8 +10,9 @@ spec:
     targetPort: 80
   selector:
     project: capstone
+  type: LoadBalancer
 status:
-    loadBalancer: {}
+  loadBalancer: {}
 ---
 ---
 apiVersion: apps/v1
@@ -22,7 +23,7 @@ metadata:
     project: capstone
   name: capstone-easypay
 spec:
-  replicas: 1
+  replicas: 2 
   selector:
     matchLabels:
       project: capstone
@@ -36,6 +37,10 @@ spec:
       containers:
       - name: capstone-easypay
         image: docker.io/smaqsoodi/capstone-project-easypay:latest
+      # Just spin & wait forever to avoic CrashloopBack
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+
         ports:
         - containerPort: 80      
         resources:
