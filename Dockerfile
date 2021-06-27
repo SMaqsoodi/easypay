@@ -1,22 +1,29 @@
-FROM ubuntu
+FROM alpine
+COPY src .
+RUN apk add php
+ENTRYPOINT ["php"]
+CMD ["-f","index.php","-S","0.0.0.0:8080"]
+EXPOSE 8080
 
-MAINTAINER SAEED MAQSOODI
+# FROM ubuntu
 
-RUN apt-get update \
-    && apt-get install -y nginx \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && echo "daemon off;" >> /etc/nginx/nginx.conf
+#MAINTAINER SAEED MAQSOODI
 
-ENTRYPOINT ["nginx"]
+#RUN apt-get update \
+#    && apt-get install -y nginx \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+#    && echo "daemon off;" >> /etc/nginx/nginx.conf
 
-ADD default /etc/nginx/sites-available/default
+#ENTRYPOINT ["nginx"]
 
-ADD src .
+#ADD default /etc/nginx/sites-available/default
 
-EXPOSE 80
+#ADD src .
 
-CMD ["nginx"]
+#EXPOSE 80
+
+#CMD ["nginx"]
                     
 
 #VOLUME 
